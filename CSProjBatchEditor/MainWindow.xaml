@@ -1,0 +1,55 @@
+﻿<Window x:Class="CSProjBatchEditor.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="CsProj Batch editor" Height="450" Width="600"
+    WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="GrayOverlay" Grid.RowSpan="3" Background="#88888888" Panel.ZIndex="3" Visibility="Collapsed">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" FontWeight="Bold">
+                <TextBlock x:Name="WaitingLabel">Loading</TextBlock><TextBlock x:Name="WaitingPoints" FontFamily="Lucida Sans Typewriter">.  </TextBlock>
+            </TextBlock>
+        </Grid>
+        <Grid Grid.Row="0" Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Label Padding="3" Grid.Column="0" VerticalAlignment="Center">Solution :</Label>
+            <TextBox x:Name="txtSolutionPath" Grid.Column="1" VerticalContentAlignment="Center" IsReadOnly="True" />
+            <Button x:Name="BrowseSolutionButton" Grid.Column="2" Padding="3 0" Margin="3 0 0 0" Click="BrowseSolutionButton_Click">sln ...</Button>
+            <Button x:Name="BrowseFolderButton" Grid.Column="3" Padding="3 0" Margin="3 0 0 0" Click="BrowseFolderButton_Click">dir ...</Button>
+        </Grid>
+        <WrapPanel Grid.Row="1" Orientation="Horizontal">
+            <Button x:Name="UpdateOutputPathButton" Padding="3 0" Margin="3 0 0 0" Click="UpdateOutputPathButton_Click" IsEnabled="False" >Change output path ...</Button>
+            <Button x:Name="GetNonProjectFiles" Padding="3 0" Margin="3 0 0 0" Click="GetNonProjectFiles_Click"  IsEnabled="False" >Get non projects files ...</Button>
+            <Button x:Name="GetReferencesPaths" Padding="3 0" Margin="3 0 0 0" Click="GetReferencesPaths_Click" IsEnabled="False">Get references paths</Button>
+            <Button x:Name="GetReferences" Padding="3 0" Margin="3 0 0 0" Click="GetReferences_Click" IsEnabled="False">Get references</Button>
+            <Button x:Name="GetProjectsPath" Padding="3 0" Margin="3 0 0 0" Click="GetProjectsPath_Click" IsEnabled="False">Get Projetcs paths</Button>
+            <Button x:Name="GetAllFilesPath" Padding="3 0" Margin="3 0 0 0" Click="GetAllFilesPath_Click" IsEnabled="False">Get All files paths</Button>
+            <Button x:Name="GetTopLevelProjects" Padding="3 0" Margin="3 0 0 0" Click="GetTopLevelProjects_Click" IsEnabled="False">Get Top Level Projects</Button>
+            <Button x:Name="GetProjectReferences" Padding="3 0" Margin="3 0 0 0" Click="GetProjectReferences_Click" IsEnabled="False">Get project references</Button>
+            <Button x:Name="FindMisversionnedReferences" Padding="3 0" Margin="3 0 0 0" Click="FindMisversionnedReferences_Click"  IsEnabled="False">Find misversionneds references</Button>
+            <Button x:Name="FindUntranslatedXaml" Padding="3 0" Margin="3 0 0 0" Click="FindUntranslatedXaml_Click" IsEnabled="False">Find untranslated xaml</Button>
+        </WrapPanel>
+        <DockPanel Grid.Row="2" Margin="3">
+            <Button x:Name="SearchReference" DockPanel.Dock="Right" Padding="3 0" Margin="3 0 0 0" Click="SearchReference_Click" IsEnabled="False" FontFamily="Symbola">Search reference</Button>
+            <TextBox x:Name="SearchText" IsEnabled="False" KeyDown="SearchText_KeyDown" />
+        </DockPanel>
+        <ListView Grid.Row="3" x:Name="ListProjects" Margin="3">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Project Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Path" DisplayMemberBinding="{Binding FilePath}"/>
+                </GridView>
+            </ListView.View>            
+        </ListView>
+    </Grid>
+</Window>
